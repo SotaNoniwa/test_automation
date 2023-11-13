@@ -1,13 +1,19 @@
 package hu.unideb.inf;
 
-import java.time.Duration;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class AbstractStepDefs {
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
+
+
+import java.time.Duration;
+
+public abstract class AbstractStepDefs {
+
     private static final int WAIT_TIME = 10;
 
     private static final WebDriver driver;
@@ -16,9 +22,13 @@ public class AbstractStepDefs {
 
     static {
 
+        /*
+        WebDriverManager.chromedriver().clearDriverCache().setup();
+        WebDriverManager.chromedriver().clearResolutionCache().setup();
+        */
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        //options.setHeadless(true);
+        options.addArguments("--headless=new");
         //options.addArguments("--no-sandbox");
         driver = new ChromeDriver(options);
 
