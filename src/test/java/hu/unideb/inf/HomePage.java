@@ -14,9 +14,11 @@ public class HomePage {
     private final WebDriver driver;
 
     @FindBy(css = "#login_button_container > div > form > div.error-message-container.error > h3")
-    private WebElement errorMessage;
+    private WebElement loginErrorMessage;
     @FindBy(css = "#checkout_summary_container > div > div.summary_info > div.summary_info_label.summary_total_label")
     private WebElement priceLabel;
+    @FindBy(xpath = "/html/body/div/div/div/div[2]/div/form/div[1]/div[4]/h3")
+    private WebElement checkoutErrorMessage;
 
     private static final Map<String, By> textFields = Map.of(
             "Username", By.id("user-name"),
@@ -63,8 +65,12 @@ public class HomePage {
         driver.findElement(navigationButtons.get(button)).click();
     }
 
-    public String getErrorMessage() {
-        return errorMessage.getText();
+    public String getLoginErrorMessage() {
+        return loginErrorMessage.getText();
+    }
+
+    public String getCheckoutErrorMessage() {
+        return checkoutErrorMessage.getText();
     }
 
     public void addItemToCart(String item) {
@@ -73,6 +79,10 @@ public class HomePage {
 
     public String getTotal() {
         return priceLabel.getText();
+    }
+
+    public String getPageUrl() {
+        return driver.getCurrentUrl();
     }
 
 }
