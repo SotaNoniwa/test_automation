@@ -1,5 +1,5 @@
 # test_automation
-===========================
+
 Project to demonstrate using Cucumber and Selenium Webdriver for test automation.
 
 The test uses the [Saucedemo](https://www.saucedemo.com/) site.
