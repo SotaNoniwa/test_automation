@@ -19,6 +19,8 @@ public class HomePage {
     private WebElement priceLabel;
     @FindBy(xpath = "/html/body/div/div/div/div[2]/div/form/div[1]/div[4]/h3")
     private WebElement checkoutErrorMessage;
+    @FindBy(css = "#shopping_cart_container > a > span")
+    private WebElement numOfItemsInCart;
 
     private static final Map<String, By> textFields = Map.of(
             "Username", By.id("user-name"),
@@ -37,11 +39,24 @@ public class HomePage {
             "Test.allTheThings() T-Shirt (Red)", By.id("add-to-cart-test.allthethings()-t-shirt-(red)")
     );
 
+    private static final Map<String, By> removeItemButtons = Map.of(
+            "Sauce Labs Backpack Remove", By.id("remove-sauce-labs-backpack"),
+            "Sauce Labs Onesie Remove", By.id("remove-sauce-labs-onesie"),
+            "Sauce Labs Fleece Jacket Remove", By.id("remove-sauce-labs-fleece-jacket"),
+            "Sauce Labs Bike Light Remove", By.id("#remove-sauce-labs-bike-light")
+    );
+
     private static final Map<String, By> navigationButtons = Map.of(
             "Login", By.id("login-button"),
             "Cart", By.className("shopping_cart_link"),
             "Checkout", By.id("checkout"),
-            "Continue", By.id("continue")
+            "Continue", By.id("continue"),
+            // Sidebar menu
+            "Sidebar", By.id("react-burger-menu-btn"),
+            "All Items", By.id("inventory_sidebar_link"),
+            "About", By.id("about_sidebar_link"),
+            "Logout", By.id("logout_sidebar_link"),
+            "Reset App State", By.id("#reset_sidebar_link")
     );
 
     public HomePage(WebDriver driver) {
@@ -77,8 +92,15 @@ public class HomePage {
         driver.findElement(itemButtons.get(item)).click();
     }
 
+    public void removeItemFromCart(String item) {
+        driver.findElement(removeItemButtons.get(item)).click();
+    }
     public String getTotal() {
         return priceLabel.getText();
+    }
+
+    public String getNumOfItemInCart() {
+        return numOfItemsInCart.getText();
     }
 
     public String getPageUrl() {
