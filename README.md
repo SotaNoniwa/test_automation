@@ -10,4 +10,4 @@ Run the tests using the following Maven command:
 
 <code>mvn test</code>
 
-total: 29 points
+total: 34 points
