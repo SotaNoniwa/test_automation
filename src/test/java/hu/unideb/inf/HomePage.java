@@ -43,7 +43,7 @@ public class HomePage {
             "Sauce Labs Backpack Remove", By.id("remove-sauce-labs-backpack"),
             "Sauce Labs Onesie Remove", By.id("remove-sauce-labs-onesie"),
             "Sauce Labs Fleece Jacket Remove", By.id("remove-sauce-labs-fleece-jacket"),
-            "Sauce Labs Bike Light Remove", By.id("#remove-sauce-labs-bike-light")
+            "Sauce Labs Bike Light Remove", By.id("remove-sauce-labs-bike-light")
     );
 
     private static final Map<String, By> navigationButtons = Map.of(
@@ -89,11 +89,26 @@ public class HomePage {
     }
 
     public void addItemToCart(String item) {
-        driver.findElement(itemButtons.get(item)).click();
+//        driver.findElement(itemButtons.get(item)).click();
+
+        By addButtonLocator = itemButtons.get(item);
+        WebElement addButton = driver.findElement(addButtonLocator);
+
+        // Check if the item is already in the cart before clicking
+        if (addButton.isDisplayed()) {
+            addButton.click();
+        }
     }
 
     public void removeItemFromCart(String item) {
-        driver.findElement(removeItemButtons.get(item)).click();
+//        driver.findElement(removeItemButtons.get(item)).click();
+        By removeButtonLocator = removeItemButtons.get(item);
+        WebElement removeButton = driver.findElement(removeButtonLocator);
+
+        // Check if the item is in the cart before clicking
+        if (removeButton.isDisplayed()) {
+            removeButton.click();
+        }
     }
     public String getTotal() {
         return priceLabel.getText();
